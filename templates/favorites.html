@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block head %}
+<h1 style="text-align: center">Favorite Movies page </h1>
+<div style="display: flex;flex-direction: row;justify-content: space-between;">
+    <div>
+        <form style="text-align: right;" method="get" action="/chat">
+            <button style="size: 10rem;" type="submit">Talk to the bot</button>
+        </form>
+    </div>
+    <div>
+        <form style="text-align: left;" method="get" action="/">
+            <button type="submit">Home Page</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div>
+    <div>
+        <h2 style="text-align: center">Movies list</h1>
+            {% if movies|length < 1 %} <h4 style="text-align: center">you haven't saved any movies go ask the bot for
+                movies to save</h4>
+                {% else %}
+                <table>
+                    <tr>
+                        <th>Movie Name</th>
+                        <th>Release Date</th>
+                        <th>Overview</th>
+                        <th>Poster</th>
+                        <th>Delete?</th>
+
+                    </tr>
+                    {% for movie in movies %}
+                    <tr>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.releasedate }}</td>
+                        <td>{{ movie.overview }}</td>
+                        <td><img src="{{movie.img}}"></td>
+                        <td>
+                            <a href="/delete/{{movie.id}}">Delete?</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
+
+    </div>
+    {% endblock %}

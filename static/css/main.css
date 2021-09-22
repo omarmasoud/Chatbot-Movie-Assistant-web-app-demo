@@ -1,0 +1,11 @@
+button { 
+  color:rgb(158, 126, 67); 
+  font: old 84% 'trebuchet ms',helvetica,sans-serif; 
+  background-color:#fed; 
+  border:4px solid; 
+  width: 20px;
+  height: fit-content ;
+  border-radius: 5px;
+  
+  border-color:rgb(199, 109, 0); 
+}

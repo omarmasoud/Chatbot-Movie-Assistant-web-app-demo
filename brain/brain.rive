@@ -1,0 +1,81 @@
+! global debug = false
+! var name = Movie Assistant
+! array confirmation = Alright then|Okay|Got it
+!sub hey =hello
+!sub sup =hello
+!sub hi =hello
+!sub morning =hello
+!sub greetings =hello
+!sub hey there =hello
+!sub goodbye =bye
+!sub see ya =bye
+!sub gn =bye
+!sub keep =save
+!sub remember =save
+!sub like =similar
+!sub find =search
+!sub get =search
+!sub look for =search
++hello
+- hey there i'm <bot name> your movie chatbot{topic=searchmovie}
+
++[*]search[*]
+-sure thing but please tell me the movie again (try to be more specific in writing it ){topic=searchmovie}
++bye
+-it was nice talking to you
+-see you later
+-i hope we talk again ^_^
+
+> topic saveorsimilar
++[*]save[*]
+-now tell me the number of the movie you want to save!
+^here is your list to choose from <call>listmovies</call>
++[*]similar[*]
+-now tell me the number of the movie you want to find movies similar to it!
+^here is your list to choose from <call>listmovies</call>{topic=similar}
++*
+-Alright!, working on it  <call>saveMovie <star> </call> {topic=searchmovie}
+
+< topic
+> topic similar
++*
+-Working on it!
+^here you go !!!<call>getSimilarMovies <star></call>
+^do you want to save any of it or find similar movies ?
++[*]yes[*]
+-{topic=saveorsimilar}
++[*]no[*]
+-{topic=searchmovie}
+< topic 
+
+> topic searchmovie
++*
+-<call>getmoviedescription <star> </call> do you want to save or show any similar movies to any of the listed ones?
++[*] yes [*]
+-sure thing, tell me what option do you want me to do save or find similar movies? {topic=saveorsimilar}
++[*] no [*]
+-Got it, thats okay for now we can make it with any other movie later! {topic=random}
+< topic
+
+> object getmoviedescription python
+    import utils
+    response=utils.getMoviesDescriptions(str(args[0]))
+    return response
+< object
+> object getSimilarMovies python
+    import utils
+    response=utils.getSimilarMoviesDescriptions(str(args[0]))
+    return response
+< object
+> object saveMovie python
+    import utils
+    response=utils.saveMovie(str(args[0]))
+    return response
+< object
+
+> object listmovies python
+    import utils
+    response=utils.listMovies()
+    return response
+
+< object

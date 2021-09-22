@@ -1,0 +1,18 @@
+from app import db, favoriteMovies
+def saveMovie(num):
+    movie=previousmovies[num]
+    newMovie=favoriteMovies(id=movie.id,title=movie.title,img=movie.img,releasedate=movie.releasedate,overview=movie.overview)
+    try:
+        db.session.add(newMovie)
+        db.session.commit
+        return "{} was saved successfully to your favorite movies".format(movie.title)
+    except:
+         return "A problem occured saving your movie ({}) to favorites <br> please try again later".format(movie.title)
+def removeMovie(id):
+    movietodelete = favoriteMovies.query.get_or_404(id)
+    try:
+        db.session.delete(movietodelete)
+        db.session.commit()
+        return "movie was deleted successfully"
+    except:
+        return 'There was a problem deleting that task'

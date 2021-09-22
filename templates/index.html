@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block head %}
+<h1>Hello! Movie Chatbot demo here,Choose what you want to do </h1>
+{% endblock %}
+{% block body %}
+<div style="display: flex;flex-direction: column ;justify-content: space-between;">
+    <form method="get" action="/chat">
+        <button style="width: 300; height: 300; border-radius: 20;" type="submit">talk to Chatbot</button>
+    </form>
+    <form method="get" action="/favorites">
+        <button style="width: 300; height: 300; border-radius: 20;" type="submit">see your favorite movies</button>
+    </form>
+</div>
+{% endblock %}
